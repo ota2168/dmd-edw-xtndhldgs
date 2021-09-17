@@ -1,0 +1,8 @@
+accessify==0.3.1
+generic-etl==0.4.7
+vertica-python==1.0.0
+parsedatetime>=2.4
+docopt==0.6.2
+utility_mixins>=0.4.3,<0.5.0
+jinjasql==0.1.8
+jinja2==2.11.3

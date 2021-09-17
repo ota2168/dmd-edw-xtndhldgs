@@ -1,0 +1,12 @@
+gitchangelog
+jupyterlab
+pre-commit
+mypy
+flake8
+pystache
+pytest-cov
+pytest
+tox
+isort<5
+pytest-runner
+wemake-python-styleguide==0.14.0

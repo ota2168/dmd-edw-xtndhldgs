@@ -1,0 +1,71 @@
+/*-------------------agmt_bill_dtl_vw_tmp1 DDL------------------*/
+
+CREATE TABLE edw_staging.agmt_bill_dtl_vw_tmp1
+(
+    AGMT_ID int,
+    AGMT_BILL_DTL_FR_DT timestamp(6),
+    AGMT_BILL_DTL_TO_DT timestamp(6),
+    PD_TO_DT date,
+    PD_TO_DT_TXT varchar(40),
+    LST_ADJ_DT date,
+    LST_COLL_DT date,
+    LST_PREM_PD_DT date,
+    LST_TRANS_DT date,
+    PREM_ACCUM_AMT_QLTY_CD varchar(10),
+    PREM_ACCUM_AMT numeric(17,2),
+    CURR_IND char(1),
+    SRC_DEL_IND char(1),
+    SRC_SYS_ID int,
+    RUN_ID int,
+    UPDT_RUN_ID int,
+    TRANS_DT timestamp(6),
+    HLDG_KEY_PFX char(20),
+    HLDG_KEY varchar(40),
+    HLDG_KEY_SFX char(20),
+    CARR_ADMIN_SYS_CD char(20),
+    AGMT_DATA_FR_DT timestamp(6),
+    LST_DPST_DT date,
+    LST_DPST_AMT numeric(17,2),
+    LST_DPST_AMT_QLTY_CD varchar(10),
+    ADMIN_CHRG_AMT numeric(17,2),
+    MINUS_1_TAX_RT numeric(15,5),
+    BILL_TO_DT date,
+    APM_NXT_BILL_DT date,
+    LST_PREM_PD_AMT numeric(17,2)
+);
+
+/*-------------------agmt_bill_dtl_vw_tmp2 DDL------------------*/
+
+CREATE TABLE edw_staging.agmt_bill_dtl_vw_tmp2
+(
+    AGMT_ID int,
+    AGMT_BILL_DTL_FR_DT timestamp(6),
+    AGMT_BILL_DTL_TO_DT timestamp(6),
+    PD_TO_DT date,
+    PD_TO_DT_TXT varchar(40),
+    LST_ADJ_DT date,
+    LST_COLL_DT date,
+    LST_PREM_PD_DT date,
+    LST_TRANS_DT date,
+    PREM_ACCUM_AMT_QLTY_CD varchar(10),
+    PREM_ACCUM_AMT numeric(17,2),
+    CURR_IND char(1),
+    SRC_DEL_IND char(1),
+    SRC_SYS_ID int,
+    RUN_ID int,
+    UPDT_RUN_ID int,
+    TRANS_DT timestamp(6),
+    HLDG_KEY_PFX char(20),
+    HLDG_KEY varchar(40),
+    HLDG_KEY_SFX char(20),
+    CARR_ADMIN_SYS_CD char(20),
+    AGMT_DATA_FR_DT timestamp(6),
+    LST_DPST_DT date,
+    LST_DPST_AMT numeric(17,2),
+    LST_DPST_AMT_QLTY_CD varchar(10),
+    ADMIN_CHRG_AMT numeric(17,2),
+    MINUS_1_TAX_RT numeric(15,5),
+    BILL_TO_DT date,
+    APM_NXT_BILL_DT date,
+    LST_PREM_PD_AMT numeric(17,2)
+);

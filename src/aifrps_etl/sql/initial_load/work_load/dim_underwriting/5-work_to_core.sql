@@ -1,0 +1,79 @@
+
+INSERT INTO edw_tdsunset.dim_underwriting
+( dim_underwriting_natural_key_hash_uuid
+, dim_agreement_natural_key_hash_uuid
+, agreement_nr_pfx
+, agreement_nr
+, agreement_nr_sfx
+, agreement_source_cde
+, agreement_type_cde
+, participant_role_cde
+, source_participant_role_cde
+, underwriting_sequence_nr
+, source_participant_role_stype_cde
+, issue_age_nr
+, exclusion_rider_ind
+, source_exclusion_rider_ind
+, exclusion_rider_form_nr
+, exclusion_cde
+, source_exclusion_cde
+, tobacco_class_cde
+, source_tobacco_class_cde
+, risk_class_cde
+, source_risk_class_cde
+, risk_class_pct
+, unisex_ind
+, exclusion_rider_2_form_nr
+, underwriting_key_id
+, begin_dt
+, begin_dtm
+, row_process_dtm
+, check_sum
+, end_dt
+, end_dtm
+, restricted_row_ind
+, current_row_ind
+, logical_delete_ind
+, source_system_id
+, audit_id
+, update_audit_id
+, source_delete_ind)
+SELECT dim_underwriting_natural_key_hash_uuid
+     , dim_agreement_natural_key_hash_uuid
+     , agreement_nr_pfx
+     , agreement_nr
+     , agreement_nr_sfx
+     , agreement_source_cde
+     , agreement_type_cde
+     , participant_role_cde
+     , source_participant_role_cde
+     , underwriting_sequence_nr
+     , source_participant_role_stype_cde
+     , issue_age_nr
+     , exclusion_rider_ind
+     , source_exclusion_rider_ind
+     , exclusion_rider_form_nr
+     , exclusion_cde
+     , source_exclusion_cde
+     , tobacco_class_cde
+     , source_tobacco_class_cde
+     , risk_class_cde
+     , source_risk_class_cde
+     , risk_class_pct
+     , unisex_ind
+     , exclusion_rider_2_form_nr
+     , underwriting_key_id
+     , begin_dt
+     , begin_dtm
+     , row_process_dtm
+     , check_sum
+     , end_dt
+     , end_dtm
+     , restricted_row_ind
+     , current_row_ind
+     , logical_delete_ind
+     , source_system_id
+     , audit_id
+     , update_audit_id
+     , source_delete_ind
+FROM edw_work.aifrps_dim_underwriting_initial_load

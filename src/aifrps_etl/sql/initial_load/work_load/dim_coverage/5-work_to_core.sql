@@ -1,0 +1,226 @@
+-- for now, we will use the edw_work.aifrps_dim_coverage_initial_load_target instead of the edw_tdsunset.dim_coverage to do testing.
+delete
+from --edw_work.aifrps_dim_coverage_initial_load_target
+     edw_tdsunset.dim_coverage
+where source_system_id = 266
+  and dim_coverage_natural_key_hash_uuid in
+      (select dim_coverage_natural_key_hash_uuid
+       from edw_work.aifrps_dim_coverage_initial_load
+      )
+  and current_row_ind = true;
+
+
+insert into edw_tdsunset.dim_coverage --edw_work.aifrps_dim_coverage_initial_load_target --
+
+( dim_coverage_natural_key_hash_uuid
+, dim_agreement_natural_key_hash_uuid
+, coverage_key_id
+, agreement_nr_pfx
+, agreement_nr
+, agreement_nr_sfx
+, agreement_source_cde
+, agreement_type_cde
+, dim_product_natural_key_hash_uuid
+, coverage_pt1_kind_cde
+, coverage_pt2_issue_basis_cde
+, coverage_pt3_rt_cde
+, coverage_sequence_nr
+, coverage_long_nm
+, coverage_short_nm
+, coverage_status_cde
+, source_coverage_exception_status_cde
+, source_coverage_effective_dt
+, source_coverage_effective_dt_txt
+, occupation_class_cde
+, source_occupation_class_cde
+, return_premium_policy_nr
+, issue_age_nr
+, coverage_type_cde
+, minor_product_cde
+, coverage_category_cde
+, source_coverage_category_cde
+, coverage_cease_dt
+, coverage_crossover_opt_dt
+, coverage_1035_ind
+, scheduled_unscheduled_cde
+, active_ind
+, pending_collection_ind
+, increment_counter_nr
+, source_coverage_cease_dt_txt
+, occupation_class_modifier_nr
+, coverage_period_txt
+, source_coverage_period_txt
+, coverage_person_cde
+, coverage_benefit_type_amt
+, palir_roll_status_cde
+, coverage_face_amt
+, coverage_income_amt
+, coverage_increase_pct
+, coverage_dividend_option_cde
+, source_coverage_dividend_option_cde
+, coverage_secondary_dividend_option_cde
+, source_coverage_secondary_dividend_option_cde
+, coverage_conversion_expiry_dt
+, coverage_conversion_eligibility_start_dt
+, coverage_fio_next_dt
+, coverage_fio_expiry_dt
+, coverage_employer_discount_type_cde
+, coverage_employer_discount_amt
+, coverage_employer_discount_pct
+, coverage_declared_dividend_amt
+, coverage_covered_insured_cde
+, coverage_cash_val_amt
+, coverage_cash_val_quality_cde
+, elimination_period_sickness_cde
+, source_waiting_period_sickness_cde
+, source_waiting_period_sickness_day_cde
+, source_waiting_period_sickness_desc
+, elimination_period_injury_cde
+, source_waiting_period_injury_cde
+, source_waiting_period_injury_day_cde
+, source_waiting_period_injury_desc
+, benefit_period_sickness_cde
+, source_benefit_period_sickness_cde
+, source_benefit_period_sickness_duration_cde
+, source_benefit_period_sickness_desc
+, benefit_period_injury_cde
+, source_benefit_period_injury_cde
+, source_benefit_period_injury_duration_cde
+, source_benefit_period_injury_desc
+, begin_dt
+, begin_dtm
+, row_process_dtm
+, check_sum
+, end_dt
+, end_dtm
+, restricted_row_ind
+, current_row_ind
+, logical_delete_ind
+, source_system_id
+, audit_id
+, update_audit_id
+, source_delete_ind
+, coverage_smoker_cde
+, coverage_expiry_dt
+, source_coverage_smoker_cde
+, flat_extra_amt
+, flat_extra_expiry_dt
+, insured_permanent_temporary_cde
+, substandard_rating_1_pct
+, substandard_rating_type_1_cde
+, source_substandard_rating_type_1_cde
+, substandard_rating_2_pct
+, substandard_rating_type_2_cde
+, source_substandard_rating_type_2_cde
+, table_rating_cde
+, source_table_rating_cde
+, coverage_table_rating_pct)
+
+select dim_coverage_natural_key_hash_uuid
+     , dim_agreement_natural_key_hash_uuid
+     , coverage_key_id
+     , agreement_nr_pfx
+     , agreement_nr
+     , agreement_nr_sfx
+     , agreement_source_cde
+     , agreement_type_cde
+     , dim_product_natural_key_hash_uuid
+     , coverage_pt1_kind_cde
+     , coverage_pt2_issue_basis_cde
+     , coverage_pt3_rt_cde
+     , coverage_sequence_nr
+     , coverage_long_nm
+     , coverage_short_nm
+     , coverage_status_cde
+     , source_coverage_exception_status_cde
+     , source_coverage_effective_dt
+     , source_coverage_effective_dt_txt
+     , occupation_class_cde
+     , source_occupation_class_cde
+     , return_premium_policy_nr
+     , issue_age_nr
+     , coverage_type_cde
+     , minor_product_cde
+     , coverage_category_cde
+     , source_coverage_category_cde
+     , coverage_cease_dt
+     , coverage_crossover_opt_dt
+     , coverage_1035_ind
+     , scheduled_unscheduled_cde
+     , active_ind
+     , pending_collection_ind
+     , increment_counter_nr
+     , source_coverage_cease_dt_txt
+     , occupation_class_modifier_nr
+     , coverage_period_txt
+     , source_coverage_period_txt
+     , coverage_person_cde
+     , coverage_benefit_type_amt
+     , palir_roll_status_cde
+     , coverage_face_amt
+     , coverage_income_amt
+     , coverage_increase_pct
+     , coverage_dividend_option_cde
+     , source_coverage_dividend_option_cde
+     , coverage_secondary_dividend_option_cde
+     , source_coverage_secondary_dividend_option_cde
+     , coverage_conversion_expiry_dt
+     , coverage_conversion_eligibility_start_dt
+     , coverage_fio_next_dt
+     , coverage_fio_expiry_dt
+     , coverage_employer_discount_type_cde
+     , coverage_employer_discount_amt
+     , coverage_employer_discount_pct
+     , coverage_declared_dividend_amt
+     , coverage_covered_insured_cde
+     , coverage_cash_val_amt
+     , coverage_cash_val_quality_cde
+     , elimination_period_sickness_cde
+     , source_waiting_period_sickness_cde
+     , source_waiting_period_sickness_day_cde
+     , source_waiting_period_sickness_desc
+     , elimination_period_injury_cde
+     , source_waiting_period_injury_cde
+     , source_waiting_period_injury_day_cde
+     , source_waiting_period_injury_desc
+     , benefit_period_sickness_cde
+     , source_benefit_period_sickness_cde
+     , source_benefit_period_sickness_duration_cde
+     , source_benefit_period_sickness_desc
+     , benefit_period_injury_cde
+     , source_benefit_period_injury_cde
+     , source_benefit_period_injury_duration_cde
+     , source_benefit_period_injury_desc
+
+     , begin_dt
+     , begin_dtm
+     , row_process_dtm
+     , check_sum
+     , end_dt
+     , end_dtm
+     , restricted_row_ind
+     , current_row_ind
+     , logical_delete_ind
+     , source_system_id
+     , audit_id
+     , update_audit_id
+     , source_delete_ind
+
+     , coverage_smoker_cde
+     , coverage_expiry_dt
+     , source_coverage_smoker_cde
+     , flat_extra_amt
+     , flat_extra_expiry_dt
+     , insured_permanent_temporary_cde
+     , substandard_rating_1_pct
+     , substandard_rating_type_1_cde
+     , source_substandard_rating_type_1_cde
+     , substandard_rating_2_pct
+     , substandard_rating_type_2_cde
+     , source_substandard_rating_type_2_cde
+     , table_rating_cde
+     , source_table_rating_cde
+     , coverage_table_rating_pct
+
+from edw_work.aifrps_dim_coverage_initial_load
+;

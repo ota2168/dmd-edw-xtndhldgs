@@ -1,0 +1,219 @@
+/*--------------------create back-up table for duplicates------------------*/
+
+
+create table edw_staging.dim_financial_transaction_rps_dups_bkp
+as select * from edw_financial_transactions.dim_financial_transaction  
+where source_system_id in ('72')
+and dim_financial_transaction_natural_key_hash_uuid in (
+select dim_financial_transaction_natural_key_hash_uuid from (
+select dim_financial_transaction_natural_key_hash_uuid,count(1)
+from edw_financial_transactions.dim_financial_transaction  
+where source_system_id in ('72')
+and transaction_dt is not null
+group by 1
+having count(1)>1)a
+);
+
+create table edw_staging.rel_financial_transaction_rps_dups_bkp
+as select * from edw_financial_transactions.rel_financial_transaction  
+where source_system_id in ('72')
+and dim_financial_transaction_natural_key_hash_uuid in (
+select dim_financial_transaction_natural_key_hash_uuid from (
+select dim_financial_transaction_natural_key_hash_uuid,count(1)
+from edw_financial_transactions.rel_financial_transaction  
+where source_system_id in ('72')
+and check_sum='4c761f17-0e01-6836-ff84-498202b99827'
+group by 1
+having count(1)>1)a
+);
+
+/*--------------------delete duplicates entries from core table------------------*/
+
+delete from edw_financial_transactions.dim_financial_transaction  
+where source_system_id in ('72')
+and transaction_dt is not null 
+and dim_financial_transaction_natural_key_hash_uuid in 
+(
+select distinct dim_financial_transaction_natural_key_hash_uuid
+from edw_staging.dim_financial_transaction_rps_dups_bkp
+);
+
+delete from edw_financial_transactions.rel_financial_transaction  
+where source_system_id in ('72')
+and check_sum='4c761f17-0e01-6836-ff84-498202b99827'
+and dim_financial_transaction_natural_key_hash_uuid in 
+(
+select distinct dim_financial_transaction_natural_key_hash_uuid
+from edw_staging.rel_financial_transaction_rps_dups_bkp
+);
+
+/*---------------re-insert distinct row record from back-up table-----------------*/
+
+INSERT INTO EDW_FINANCIAL_TRANSACTIONS.DIM_FINANCIAL_TRANSACTION
+
+(DIM_FINANCIAL_TRANSACTION_NATURAL_KEY_HASH_UUID,
+ FINANCIAL_TRANSACTION_UNIQUE_ID,
+ REF_FINANCIAL_TRANSACTION_SOURCE_NATURAL_KEY_HASH_UUID,
+ REF_FINANCIAL_TRANSACTION_TYPE_NATURAL_KEY_HASH_UUID,
+ PAY_GROUP_NR_TXT,
+ CHECK_FORM_ID,
+ TRANSACTION_DT,
+ CHECK_STATUS_CDE,
+ ACCOUNT_NR_TXT,
+ TAX_REPORTING_CDE,
+ ORIGINAL_CHECK_NR,
+ DISTRIBUTION_CDE,
+ SOURCE_PAYEE_UNIQUE_ID,
+ CLEAR_DT,
+ CLEAR_REFERENCE_NR_TXT,
+ REVERSAL_DT,
+ BEGIN_DT,
+ BEGIN_DTM,
+ ROW_PROCESS_DTM,
+ AUDIT_ID,
+ LOGICAL_DELETE_IND,
+ CHECK_SUM,
+ CURRENT_ROW_IND,
+ END_DT,
+ END_DTM,
+ SOURCE_SYSTEM_ID,
+ RESTRICTED_ROW_IND,
+ UPDATE_AUDIT_ID,
+ SOURCE_DELETE_IND,
+ SOURCE_TRANSACTION_KEY_TXT,
+ ROUTING_NR_TXT,
+ PAYMENT_METHOD_CDE,
+ PREVIOUS_SOURCE_TRANSACTION_KEY_TXT,
+ EFFECTIVE_DT,
+ SYSTEM_DT,
+ TRANSACTION_CDE,
+ SOURCE_TRANSACTION_CDE,
+ TRANSACTION_REVERSAL_CDE,
+ ADMIN_FUND_CDE,
+ PRODUCT_ID,
+ COMPANY_CDE,
+ SOURCE_COMPANY_CDE,
+ PT1_KIND_CDE,
+ PRODUCT_TIER_CDE,
+ FUND_TYPE_CDE,
+ SOURCE_FUND_TYPE_CDE,
+ COVERAGE_TYPE_CDE,
+ COVERAGE_OCCURANCE_NR,
+ TRANSACTION_SOURCE_ID,
+ TRANSACTION_MEMO_CDE,
+ ROLLOVER_CDE,
+ SOURCE_ROLLOVER_CDE,
+ GMIB_STATUS_CDE,
+ ADMINISTRATION_CDE,
+ SOURCE_ADMINISTRATION_CDE,
+ DISBURSEMENT_TRANSACTION_NR_TXT,
+ REPLACEMENT_TRANSACTION_NR_TXT,
+ TRANSACTION_DESC,
+ SOURCE_TRANSACTION_DESC,
+ TRANSACTION_REPORTING_DESC,
+ TRANSACTION_REPORTING_DETAIL_DESC)
+ SELECT DISTINCT
+ DIM_FINANCIAL_TRANSACTION_NATURAL_KEY_HASH_UUID,
+ FINANCIAL_TRANSACTION_UNIQUE_ID,
+ REF_FINANCIAL_TRANSACTION_SOURCE_NATURAL_KEY_HASH_UUID,
+ REF_FINANCIAL_TRANSACTION_TYPE_NATURAL_KEY_HASH_UUID,
+ PAY_GROUP_NR_TXT,
+ CHECK_FORM_ID,
+ TRANSACTION_DT,
+ CHECK_STATUS_CDE,
+ ACCOUNT_NR_TXT,
+ TAX_REPORTING_CDE,
+ ORIGINAL_CHECK_NR,
+ DISTRIBUTION_CDE,
+ SOURCE_PAYEE_UNIQUE_ID,
+ CLEAR_DT,
+ CLEAR_REFERENCE_NR_TXT,
+ REVERSAL_DT,
+ BEGIN_DT,
+ BEGIN_DTM,
+ ROW_PROCESS_DTM,
+ AUDIT_ID,
+ LOGICAL_DELETE_IND,
+ CHECK_SUM,
+ CURRENT_ROW_IND,
+ END_DT,
+ END_DTM,
+ SOURCE_SYSTEM_ID,
+ RESTRICTED_ROW_IND,
+ UPDATE_AUDIT_ID,
+ SOURCE_DELETE_IND,
+ SOURCE_TRANSACTION_KEY_TXT,
+ ROUTING_NR_TXT,
+ PAYMENT_METHOD_CDE,
+ PREVIOUS_SOURCE_TRANSACTION_KEY_TXT,
+ EFFECTIVE_DT,
+ SYSTEM_DT,
+ TRANSACTION_CDE,
+ SOURCE_TRANSACTION_CDE,
+ TRANSACTION_REVERSAL_CDE,
+ ADMIN_FUND_CDE,
+ PRODUCT_ID,
+ COMPANY_CDE,
+ SOURCE_COMPANY_CDE,
+ PT1_KIND_CDE,
+ PRODUCT_TIER_CDE,
+ FUND_TYPE_CDE,
+ SOURCE_FUND_TYPE_CDE,
+ COVERAGE_TYPE_CDE,
+ COVERAGE_OCCURANCE_NR,
+ TRANSACTION_SOURCE_ID,
+ TRANSACTION_MEMO_CDE,
+ ROLLOVER_CDE,
+ SOURCE_ROLLOVER_CDE,
+ GMIB_STATUS_CDE,
+ ADMINISTRATION_CDE,
+ SOURCE_ADMINISTRATION_CDE,
+ DISBURSEMENT_TRANSACTION_NR_TXT,
+ REPLACEMENT_TRANSACTION_NR_TXT,
+ TRANSACTION_DESC,
+ SOURCE_TRANSACTION_DESC,
+ TRANSACTION_REPORTING_DESC,
+ TRANSACTION_REPORTING_DETAIL_DESC
+ FROM EDW_STAGING.DIM_FINANCIAL_TRANSACTION_RPS_DUPS_BKP;
+ 
+ 
+ INSERT INTO EDW_FINANCIAL_TRANSACTIONS.REL_FINANCIAL_TRANSACTION
+
+(DIM_FINANCIAL_TRANSACTION_NATURAL_KEY_HASH_UUID,
+ DIM_PARTY_NATURAL_KEY_HASH_UUID,
+ DIM_AGREEMENT_NATURAL_KEY_HASH_UUID,
+ BEGIN_DT,
+ BEGIN_DTM,
+ ROW_PROCESS_DTM,
+ AUDIT_ID,
+ LOGICAL_DELETE_IND,
+ CHECK_SUM,
+ CURRENT_ROW_IND,
+ END_DT,
+ END_DTM,
+ SOURCE_SYSTEM_ID,
+ RESTRICTED_ROW_IND,
+ UPDATE_AUDIT_ID,
+ SOURCE_DELETE_IND,
+ DIM_FUND_NATURAL_KEY_HASH_UUID)
+ SELECT DISTINCT
+ DIM_FINANCIAL_TRANSACTION_NATURAL_KEY_HASH_UUID,
+ DIM_PARTY_NATURAL_KEY_HASH_UUID,
+ DIM_AGREEMENT_NATURAL_KEY_HASH_UUID,
+ BEGIN_DT,
+ BEGIN_DTM,
+ ROW_PROCESS_DTM,
+ AUDIT_ID,
+ LOGICAL_DELETE_IND,
+ CHECK_SUM,
+ CURRENT_ROW_IND,
+ END_DT,
+ END_DTM,
+ SOURCE_SYSTEM_ID,
+ RESTRICTED_ROW_IND,
+ UPDATE_AUDIT_ID,
+ SOURCE_DELETE_IND,
+ DIM_FUND_NATURAL_KEY_HASH_UUID
+ FROM EDW_STAGING.REL_FINANCIAL_TRANSACTION_RPS_DUPS_BKP;
+ 
+ COMMIT;

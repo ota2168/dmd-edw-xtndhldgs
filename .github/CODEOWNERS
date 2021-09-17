@@ -1,0 +1,10 @@
+# This file is used to automatically request reviews on PRs.
+
+# Owners may be username, email, or massmutual/team_name
+# It's also possible to add notifications based on language or location in repo.
+# More info at docs: https://help.github.com/articles/about-codeowners/
+
+
+# These owners will be the default owners for everything in
+# the repo, unless a match on a later line takes precedence.
+*        @massmutual/agreement-admin
