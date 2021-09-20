@@ -1,9 +1,9 @@
 """Test nothing."""
-import aifrps_etl
+import edwxtndhldgs_etl
 
 
 def test_import():
     """Test nothing.
 
     """
-    assert aifrps_etl is not None
+    assert edwxtndhldgs_etl is not None

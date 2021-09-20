@@ -1,8 +1,8 @@
-"""CLI entrypoint for aifrps_etl.
+"""CLI entrypoint for edwxtndhldgs_etl.
 
 Usage:
-    aifrps_etl --help
-    aifrps_etl [options]
+    edwxtndhldgs_etl --help
+    edwxtndhldgs_etl [options]
 
 Options:
   -h --help                         Show this screen
@@ -34,13 +34,13 @@ import logging
 from docopt import docopt
 import json
 
-from aifrps_etl.aifrps_etl import AifRpsETL
-from aifrps_etl.initial_load import AifRpsETLInitialLoad
-from aifrps_etl.utils import unpack_sql_into_cwd
+from edwxtndhldgs_etl.edwxtndhldgs_etl import EdwXtndhldgsETL
+from edwxtndhldgs_etl.initial_load import EdwXtndhldgsETLInitialLoad
+from edwxtndhldgs_etl.utils import unpack_sql_into_cwd
 
 
 def main():
-    """TD Sunset AIF-RPS ETL application Entrypoint."""
+    """TD Sunset EDW-XTNDHLDGS ETL application Entrypoint."""
     args = docopt(__doc__)
     log_level = logging.INFO if args["--log-level"].upper() == "INFO" else logging.DEBUG
     logging.basicConfig(format="%(asctime)s %(levelname)s: %(message)s", level=log_level)
@@ -83,7 +83,7 @@ def main():
         args["--init-load-restart"] = init_load_restart
 
     if not args["--initial-load"]:
-        aifrps = AifRpsETL(
+        edwxtndhldgs = EdwXtndhldgsETL(
             db_host=args["--db-host"],
             db_port=args["--db-port"],
             db_name=args["--db-name"],
@@ -102,7 +102,7 @@ def main():
             sql_identifiers=args["--sql-identifiers"],
         )
     else:
-        aifrps = AifRpsETLInitialLoad(
+        edwxtndhldgs = EdwXtndhldgsETLInitialLoad(
             db_host=args["--db-host"],
             db_port=args["--db-port"],
             db_name=args["--db-name"],
@@ -115,7 +115,7 @@ def main():
 
         )
 
-    aifrps.run()
+    edwxtndhldgs.run()
 
 
 if __name__ == "__main__":
