@@ -1,4 +1,4 @@
-"""ETL implementation for TD Sunset Agreement project, AIF-RPS"""
+"""ETL implementation for TD Sunset Extended Holdings project, EDW-XTNDHLDGS"""
 from typing import Any
 from typing import Dict
 from typing import cast
@@ -7,10 +7,10 @@ from generic_etl.generic_etl import GenericETL
 from generic_etl.mdc.model import ETLStep
 from generic_etl.common.vertica_utils import VerticaUtils
 
-ETL_PROJECT_NAME = "AIF_RPS"
+ETL_PROJECT_NAME = "EDW_XTNDHLDGS"
 
-class AifRpsETL(GenericETL):
-    """TD Sunset AIF-RPS ETL application, inherit common functionalities from GenericETL class."""
+class EdwXtndhldgsETL(GenericETL):
+    """TD Sunset EDW-XTNDHLDGS ETL application, inherit common functionalities from GenericETL class."""
 
     def __init__(
             self,
@@ -31,7 +31,7 @@ class AifRpsETL(GenericETL):
             dry_run: bool = False,
             sql_identifiers: Dict[str, Any] = {},
     ) -> None:
-        """Teradata Agreement ETL application, inherit common functionalities from GenericETL class."""
+        """Teradata Extended Holdings ETL application, inherit common functionalities from GenericETL class."""
         super().__init__(
             db_host,
             db_port,
@@ -51,7 +51,7 @@ class AifRpsETL(GenericETL):
             dry_run=dry_run,
             sql_identifiers=sql_identifiers,
         )
-        """Generate a TeraDataAgreementETL object.
+        """Generate a TeraDataExtendedHoldingsETL object.
 
         :param db_host: edw server hostname.
         :param db_port: edw server port number.

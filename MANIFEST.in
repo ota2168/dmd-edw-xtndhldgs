@@ -1,4 +1,4 @@
 include VERSION
 include requirements.txt
 include requirements-dev.txt
-graft src/aifrps_etl/sql
+graft src/edwxtndhldgs_etl/sql

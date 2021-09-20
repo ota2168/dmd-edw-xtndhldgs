@@ -5,7 +5,7 @@ from pathlib import Path
 from setuptools import find_packages
 from setuptools import setup
 
-PACKAGE_NAME = "aifrps_etl"
+PACKAGE_NAME = "edwxtndhldgs_etl"
 
 
 def _read(path: str) -> str:
@@ -31,7 +31,7 @@ setup(
     long_description=_read("./README.md"),
     author="Amit_Kumar",
     author_email="akumar66@massmutual.com",
-    url="https://github.com/massmutual/aifrps",
+    url="https://github.com/massmutual/edwxtndhldgs",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     zip_safe=False,
@@ -39,7 +39,7 @@ setup(
     python_requires=">=3.7",
     entry_points={
         "console_scripts": [
-            "aifrps-etl = aifrps_etl.cli:main"
+            "edwxtndhldgs-etl = edwxtndhldgs_etl.cli:main"
         ]
     },
     install_requires=requirements,

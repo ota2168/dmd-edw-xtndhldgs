@@ -11,7 +11,7 @@ pip = $(python_venv)/bin/pip
 pre-commit = $(python_venv)/bin/pre-commit
 
 # Package Name - keep in sync with name of package
-package_name = aifrps_etl
+package_name = edwxtndhldgs_etl
 
 
 default: help

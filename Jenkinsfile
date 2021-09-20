@@ -1,13 +1,13 @@
 pipeline {
     agent {
         kubernetes {
-            label 'aifrps'
+            label 'edwxtndhldgs'
             defaultContainer 'default'
             yamlFile 'ci/pod.yaml'
         }
     }
     environment {
-        APP_NAME = 'aifrps_etl'
+        APP_NAME = 'edwxtndhldgs_etl'
         ARTIFACT_DIR = 'dist/'
     }
     options {

@@ -7,8 +7,8 @@ import utility_mixins as mix
 from generic_etl.common.vertica_utils import VerticaUtils as v
 
 
-class AifRpsETLInitialLoad(mix.LoggingMixin, mix.PathMixin):
-    """AIF-RPS initial load application."""
+class EdwXtndhldgsETLInitialLoad(mix.LoggingMixin, mix.PathMixin):
+    """EDW-XTNDHLDGS initial load application."""
 
     _logger_name = __name__.split(".")[0]
 
@@ -25,7 +25,7 @@ class AifRpsETLInitialLoad(mix.LoggingMixin, mix.PathMixin):
         debug_mode: bool = False,
 
     ) -> None:
-        """Generate a AifRpsETLInitialLoad object.
+        """Generate a EdwXtndhldgsETLInitialLoad object.
 
         :param db_host: edw server hostname.
         :param db_port: edw server port number.
